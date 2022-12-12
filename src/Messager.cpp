@@ -307,7 +307,7 @@ bool Messager :: startSocketInput( int port )
   return true;
 }
 
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
   #include <sys/time.h>
   #include <errno.h>
 #endif
@@ -364,7 +364,7 @@ THREAD_RETURN THREAD_TYPE socketHandler(void *ptr)
       // This connection has data.  Read and parse it.
       bytesRead = 0;
       index = 0;
-#if ( defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) )
+#if ( defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__) )
       errno = 0;
       while (bytesRead != -1 && errno != EAGAIN) {
 #elif defined(__OS_WINDOWS__)

@@ -3,7 +3,7 @@
 
 #include "Stk.h"
 
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   #include <sys/socket.h>
   #include <sys/types.h>

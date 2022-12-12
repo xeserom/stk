@@ -41,7 +41,7 @@ bool Thread :: start( THREAD_FUNCTION routine, void * ptr )
     return false;
   }
 
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   if ( pthread_create(&thread_, NULL, *routine, ptr) == 0 )
     return true;
@@ -68,13 +68,19 @@ bool Thread :: cancel()
   TerminateThread((HANDLE)thread_, 0);
   return true;
 
+#elif defined(__OS_ANDROID__)
+  
+  if ( pthread_kill(thread_, SIGUSR1) == 0 ) {
+    return true;
+  }
+
 #endif
   return false;
 }
 
 bool Thread :: wait()
 {
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   if ( pthread_join(thread_, NULL) == 0 ) {
     thread_ = 0;

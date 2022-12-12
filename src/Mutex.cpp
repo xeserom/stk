@@ -18,7 +18,7 @@ namespace stk {
 Mutex :: Mutex()
 {
 
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   pthread_mutex_init(&mutex_, NULL);
   pthread_cond_init(&condition_, NULL);
@@ -36,7 +36,7 @@ Mutex :: Mutex()
 
 Mutex :: ~Mutex()
 {
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   pthread_mutex_destroy(&mutex_);
   pthread_cond_destroy(&condition_);
@@ -51,7 +51,7 @@ Mutex :: ~Mutex()
 
 void Mutex :: lock()
 {
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   pthread_mutex_lock(&mutex_);
 
@@ -64,7 +64,7 @@ void Mutex :: lock()
 
 void Mutex :: unlock()
 {
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   pthread_mutex_unlock(&mutex_);
 
@@ -77,7 +77,7 @@ void Mutex :: unlock()
 
 void Mutex :: wait()
 {
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   pthread_cond_wait(&condition_, &mutex_);
 
@@ -90,7 +90,7 @@ void Mutex :: wait()
 
 void Mutex :: signal()
 {
-#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__))
+#if (defined(__OS_IRIX__) || defined(__OS_LINUX__) || defined(__OS_MACOSX__) || defined(__OS_ANDROID__))
 
   pthread_cond_signal(&condition_);
 
